@@ -1,0 +1,73 @@
+{{#partial "header"}}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title> {{#block "title"}} SparkBlog{{/block}}</title>
+        <link href='https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Noto+Sans:700,400' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/site.css">
+    </head>
+    <body>
+    <header>
+        <div class="container">
+            {{#if password }}
+                <div class="site-header">
+                    <a class="logo" href="/">SparkBlog</a>
+                    <a class="new-entry button button-round" href="/{{entry.slug}}/edit"><i class="material-icons">create</i></a>
+                </div>
+            {{ else }}
+                <div class="site-header">
+                    <a class="logo" href="/">SparkBlog</a>
+                    <a class="new-entry button button-round" href="/password"><i class="material-icons">create</i></a>
+                </div>
+
+            {{/if}}
+
+        </div>
+    </header>
+{{/partial}}
+
+{{#partial "content"}}
+    <section>
+        <div class="container">
+            <div class="entry-list single">
+                <article>
+                    <h1>{{entry.title}}</h1>
+                    <time>{{entry.date}}</time>
+                    <div class="entry">
+                        <p>{{entry.entry}}</p>
+                        <p><a class="link" href="/{{entry.slug}}/edit">Edit Entry</a></p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="entry-comments">
+        <div class="container">
+            <h2>Comments</h2>
+            <div class="comment">
+                {{#each entry.comments}}
+                    <strong>{{this.author}}</strong>
+                    <time>{{this.date}}</time>
+                    <p>{{this.content}}</p>
+                {{/each}}
+            </div>
+
+
+            <div class="new-comment">
+            <form action="/{{entry.slug}}" method="post">
+                    <label for="author"> Name</label>
+                    <input type="text" name="author"><br>
+                    <label for="content">Comment</label>
+                    <textarea rows="5" name="content"></textarea>
+                    <input type="submit" value="Post Comment" class="button">
+                </form>
+            </div>
+        </div>
+    </section>
+{{/partial}}
+{{>base.hbs}}
