@@ -17,23 +17,12 @@ public class Comment {
         return author;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     public Date getDate() {
         return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public String getContent() {
         return content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
 }
